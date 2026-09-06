@@ -227,5 +227,5 @@ count(trx) as avg_insurance_claimed
 from prescription_data
 group by payer_type having sum(trx)<300;
 
-SELECT COUNT(*) total_records
-FROM Prescription_Data;
+#SELECT COUNT(*) total_records
+#FROM Prescription_Data;
