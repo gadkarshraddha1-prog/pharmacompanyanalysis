@@ -227,5 +227,27 @@ count(trx) as avg_insurance_claimed
 from prescription_data
 group by payer_type having sum(trx)<300;
 
-#SELECT COUNT(*) total_records
-#FROM Prescription_Data;
+SELECT COUNT(*) total_records
+FROM Prescription_Data;
+
+select count(*) territory_id
+from sales_territories;
+
+SELECT 
+    p.physician_id,
+    CONCAT(p.first_name, ' ', p.last_name) AS physician_name,
+    p.specialty,
+    st.territory_name,
+    st.region,
+    pd.rx_id,
+    pd.trx AS total_prescriptions,
+    pd.payer_type
+FROM Physicians p
+JOIN Sales_Territories st 
+    ON p.territory_id = st.territory_id
+JOIN Prescription_Data pd 
+    ON p.physician_id = pd.physician_id
+WHERE st.region = 'North'
+  AND p.specialty = 'Oncology'
+  AND pd.trx > 50
+ORDER BY pd.trx DESC;
